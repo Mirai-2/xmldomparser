@@ -23,24 +23,31 @@ public class DomParser {
 	DocumentBuilder docBuilder = dbldrFactory.newDocumentBuilder();
 	Document docmt = docBuilder.parse(inputDataFile);
 	docmt.getDocumentElement().normalize();
-	System.out.println("Name of the Root element:" + docmt.getDocumentElement().getNodeName());
-
-	NodeList ndList = docmt.getElementsByTagName("employee");
-
+	System.out.println("Nombre de la etiqueta raiz: " + docmt.getDocumentElement().getNodeName());
+	
+	System.err.println("Datos del " + docmt.getDocumentElement().getAttribute("year"));
+	System.out.println("-------------------------");
+	
+	NodeList ndList = docmt.getElementsByTagName("pais");
+	
 	   for (int tempval = 0; tempval < ndList.getLength(); tempval++) {
 	       Node nd = ndList.item(tempval);
-	       System.out.println("\n Name of the current element :" + nd.getNodeName());
+	       //System.out.println("\n Name of the current element :" + nd.getNodeName());
 	       if (nd.getNodeType() == Node.ELEMENT_NODE) {
 	           Element elemnt = (Element) nd;
-	           System.out.println("Employee ID : " + elemnt.getAttribute("empid"));
-	           System.out.println("Employee First Name: " + elemnt
-	                  .getElementsByTagName("firstname").item(0).getTextContent());
-	           System.out.println("Employee Last Name: " + elemnt
-	                  .getElementsByTagName("lastname").item(0).getTextContent());
-	           System.out.println("Employee Nick Name: " + elemnt
-	                  .getElementsByTagName("nickname").item(0).getTextContent());
-	           System.out.println("Employee Salary: " + elemnt
-	                  .getElementsByTagName("salary").item(0).getTextContent());
+	           //System.out.println("Employee ID : " + elemnt.getAttribute("empid"));
+	           String pais = elemnt.getElementsByTagName("nombre").item(0).getTextContent();
+	           
+	           int hombres = Integer.parseInt( elemnt.getElementsByTagName("hombres").item(0).getTextContent());
+	           int mujeres = Integer.parseInt( elemnt.getElementsByTagName("mujeres").item(0).getTextContent());
+	           int total = hombres + mujeres;
+	           //System.out.println(mujeres);
+	           System.out.println("Nombre del país: " + pais);
+	           System.out.println("Población de hombres: " + hombres);
+	           System.out.println("Población de mujeres: " + mujeres);
+	           System.out.println("Total de población: " + total);
+	           System.out.println("----------------------------");
+
 	        }
        }
    }

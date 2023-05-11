@@ -8,7 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        DomParser dp = new DomParser("company.xml");
+        DomParser dp = new DomParser("paises.xml");
         try {
 			dp.parse();
 		} catch (Exception e) {
